@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+      function genTT() {
+        var num = parseInt(document.getElementById('intBox').value);
+        if(!num || num < 1 || num > 9) {
+          alert("Invalid value entered");
+          return;
+        }
+        var table1 = "";
+        var table2 = "<ul>";
+
+        for (var i = 1; i < 10; i++) {
+          table1 += num + " x " + i + " = " + num * i + "<br>";
+          table2 += "<li>" + num + " x " + i + " = " + num * i + "</li>";
+        }
+        table2 += "</ul>";
+        document.getElementById('demo1').innerHTML = table1;
+        document.getElementById('demo2').innerHTML = table2;
+      }
+    </script>
+    <title>Part 1</title>
+  </head>
+  <body>
+
+    Enter an integer from 1 to 9:
+    <input type="text" id="intBox">
+    <button type="button" id="generate" onclick="genTT()">Generate times tables</button>
+    <table>
+      <tr>
+        <td>
+          <p id="demo1"></p>
+        </td>
+        <td>
+          <p id="demo2"></p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      html, body  {
+        width:100vw;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        max-width:100%;
+        background-color: #B1B1B1;
+        box-sizing: border-box;
+      }
+      h2  {
+        margin: 0;
+        margin-bottom: 20px;
+      }
+      .content-wrapper  {
+        width: 75%;
+        margin: 10vh auto;
+        background-color: white;
+        height: 100%;
+        text-align: center;
+        padding:2%;
+        box-sizing: border-box;
+      }
+
+      .navbar {
+        position: fixed;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex;
+        top: 0;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 7%;
+        padding: 10px;
+        background-color: #F27878;
+        text-align: center;
+        box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.6);
+      }
+
+      .navtabs a {
+        color: black;
+        padding: 14px 20px;
+        text-decoration: none;
+        text-align: center;
+        font-size: 25px;
+      }
+
+      /* Change color on hover */
+      .navtabs a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+      .navtabs  {
+
+      }
+      .side-icons  {
+        position:fixed;
+        right: 0;
+        top: 7%;
+        background-color: #F27878;
+        padding: 8px;
+        border-radius: 0 0 0 20px;
+        box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.6);
+      }
+
+      .feedbackForm {
+        text-align: center;
+        display: inline-block;
+      }
+
+      .feedbackType {
+        width:100%;
+        border-collapse: separate;
+        border-spacing: 50px 20px;
+      }
+
+      .feedbackType td  {
+        border: 2px solid #F27878;
+        background-color: #F27878;
+        color: white;
+        border-radius: 10px;
+        height: 30px;
+      }
+
+      .feedbackScale {
+        display: inline-block;
+      }
+
+    </style>
+    <script type="text/javascript">
+      var db;
+      function onLoad() {
+        db = openDatabase('websiteDB', '1.0', 'Database that contains information for website', 20 * 1024 * 1024);
+
+        db.transaction(function(tx) {
+          // tx.executeSql('DROP TABLE COMMENTS');
+          tx.executeSql('CREATE TABLE IF NOT EXISTS FEEDBACKTABLE (fbscale, fbtype, fbbody)');
+        });
+      }
+
+      function submitForm() {
+        var fbScale = document.querySelector('input[name = "scale"]:checked').value;
+        var fbType = document.querySelector('input[name = "type"]:checked').value;
+        var fbBody = document.getElementById('body').value;
+        if (typeof fbScale == 'undefined' || typeof fbType == 'undefined' || typeof fbBody == 'undefined')
+          return;
+        db.transaction( function(tx)  {
+          tx.executeSql(`INSERT INTO FEEDBACKTABLE VALUES("${fbScale}","${fbType}","${fbBody}")`);
+        })
+      }
+    </script>
+    <title>Feedback</title>
+  </head>
+  <body onload="onLoad()">
+    <div class="navbar">
+      <div class="navtabs">
+        <a href="home.html">Home</a>
+        <a href="pictures.html">Pictures</a>
+        <a href="about.html">About</a>
+        <a href="feedback.html">Feedback</a>
+      </div>
+      <div class="side-icons">
+        <table>
+          <tr>
+            <td>
+              <a href="https://www.instagram.com/ethan_dsouza/" target="_blank"><img src="Resources/instagram.png" height="25px;" alt="instagram"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://github.com/ethanjd" target="_blank"><img src="Resources/github.png" height="25px;" alt="github"></a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="https://www.linkedin.com/in/ethan-joseph-dsouza/" target="_blank"><img src="Resources/linkedin.png" height="25px;" alt="linkedin"></a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="content-wrapper">
+      <h1>I would love your feedback!</h1>
+      <hr>
+      <h2>What is your opinion of this website?</h2>
+      <form class="feedbackForm" onsubmit="submitForm()">
+        <table class="feedbackScale">
+          <tr>
+            <td>
+              <img src="Resources/1.png" alt="">
+            </td>
+            <td>
+              <img src="Resources/2.png" alt="">
+            </td>
+            <td>
+              <img src="Resources/3.png" alt="">
+            </td>
+            <td>
+              <img src="Resources/4.png" alt="">
+            </td>
+            <td>
+              <img src="Resources/5.png"  alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="radio" name="scale" value="1">
+            </td>
+            <td>
+              <input type="radio" name="scale" value="2">
+            </td>
+            <td>
+              <input type="radio" name="scale" value="3">
+            </td>
+            <td>
+              <input type="radio" name="scale" value="4">
+            </td>
+            <td>
+              <input type="radio" name="scale" value="5">
+            </td>
+          </tr>
+        </table>
+      <hr>
+      <h1>What kind of feedback would you like to leave?</h1>
+      <table class="feedbackType">
+        <tr>
+          <td>
+            Suggestion <br>
+            <input type="radio" name="type" value="suggestion">
+          </td>
+          <td>
+            Complaint <br>
+            <input type="radio" name="type" value="complaint">
+          </td>
+          <td>
+          Compliment <br>
+          <input type="radio" name="type" value="compliment">
+          </td>
+        </tr>
+      </table>
+      <hr>
+      <h1>Please leave your feedback below:</h1>
+      <input type="text" id="body" style="width:95%;">
+      <br><br><br>
+      <input type="submit" name="" value="Submit" style=" font-size:20px; border-radius: 10px; background-color: #F27878; color: white; border: 2px solid #F27878; float: right; margin-right:3%;">
+    </form>
+    </div>
+  </body>
+</html>

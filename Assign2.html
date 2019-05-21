@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      html, body {
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+      }
+      .leftText  {
+        padding-top:20%;
+        width: 100%;
+        height: 150px;
+        vertical-align: middle;
+        color: white;
+        background-color:black;
+        text-align: center;
+      }
+      .rightText  {
+        padding-top:20%;
+        width: 100%;
+        height: 150px;
+        vertical-align: middle;
+        color: white;
+        background-color: grey;
+        text-align: center;
+      }
+      table {
+        width:100vw;
+      }
+    </style>
+    <script type="text/javascript">
+      var left = true;
+      var text;
+      function startClick() {
+        if (!text) {
+          text = prompt("Please enter your name", "Name");
+          document.getElementById("leftText").innerHTML = text;
+        }
+        else {
+          alert("Hit clear first!")
+        }
+      }
+      function clearClick() {
+        document.getElementById("leftText").innerHTML = "";
+        document.getElementById("rightText").innerHTML = "";
+        text=null;
+      }
+      function moveRightClick()  {
+        if (left && text) {
+          document.getElementById("rightText").innerHTML = text;
+          document.getElementById("leftText").innerHTML = "";
+          left = false;
+        }
+      }
+      function moveLeftClick()  {
+        if (!left && text) {
+          document.getElementById("leftText").innerHTML = text;
+          document.getElementById("rightText").innerHTML = "";
+          left = true;
+        }
+      }
+    </script>
+    <title>Assignment 2</title>
+  </head>
+  <body>
+    <button type="button" id="start" onclick="startClick()">Start</button>
+    <button type="button" id="clear" onclick="clearClick()">Clear</button><br><br><br><br>
+    <table>
+      <tr>
+        <td style="width:40%;">
+          <div id="leftText" class="leftText">
+
+          </div>
+        </td>
+        <td style="width:20%;text-align:center;">
+          <div style="">
+            <button type="button" id="moveRight" onclick="moveRightClick()">---&gt;</button><br><br>
+            <button type="button" id="moveLeft" onclick="moveLeftClick()">&lt;---</button>
+          </div>
+        </td>
+        <td style="width:40%;">
+          <div id="rightText" class="rightText">
+
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

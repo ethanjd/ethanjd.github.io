@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      html, body {
+        height:100vh;
+        width:100vw;
+      }
+      #title1, #title2 {
+        font-size: 25px;
+        font-weight: bold;
+      }
+      #numSpan  {
+        font-size: 25px;
+        font-weight: bold;
+        color: green;
+      }
+      #scoreSpan  {
+        font-size: 25px;
+        font-weight: bold;
+        color: red;
+      }
+      .numbers {
+        font-size:200px;
+        height:50px;
+      }
+      .numbers td {
+        padding:25px;
+      }
+    </style>
+    <script type="text/javascript">
+      var num, score, speed, leftNum, midNum, rightNum;
+      var gameLoop;
+
+      function startGame()  {
+        var x;
+        num = parseInt(prompt("Choose a number between 0 and 9"));
+        score = 0;
+        speed = 1000;
+        if (!num || num < 0 || num > 9) {
+          alert("Invalid choice");
+          return;
+        }
+        document.getElementById('title1').hidden = false;
+        document.getElementById('title2').hidden = false;
+        document.getElementById('gameTable').hidden = false;
+        document.getElementById('numSpan').innerHTML = num;
+        document.getElementById('scoreSpan').innerHTML = score;
+
+        gameLoop = window.setInterval( function()  {
+          var x = Math.random() * 3;
+          if (x < 1) {
+            leftNum = num;
+            midNum = Math.floor(Math.random()*10);
+            rightNum = Math.floor(Math.random()*10);
+          } else if (x < 2) {
+            leftNum = Math.floor(Math.random()*10);
+            midNum = num;
+            rightNum = Math.floor(Math.random()*10);
+          } else {
+            leftNum = Math.floor(Math.random()*10);
+            midNum = Math.floor(Math.random()*10);
+            rightNum = num;
+          }
+
+          document.getElementById('left').innerHTML = leftNum;
+          document.getElementById('mid').innerHTML = midNum;
+          document.getElementById('right').innerHTML = rightNum;
+        }, speed);
+      }
+
+      function clickLeft() {
+        if (num == leftNum) {
+          score++;
+        } else {
+          score--;
+        }
+        document.getElementById('scoreSpan').innerHTML = score;
+      }
+
+      function clickMid() {
+        if (num == midNum) {
+          score++;
+        } else {
+          score--;
+        }
+        document.getElementById('scoreSpan').innerHTML = score;
+      }
+
+      function clickRight() {
+        if (num == rightNum) {
+          score++;
+        } else {
+          score--;
+        }
+        document.getElementById('scoreSpan').innerHTML = score;
+      }
+
+      function stopGame() {
+        clearInterval(gameLoop);
+      }
+
+      function changeSpeed()  {
+        stopGame();
+        if (!num || num < 0 || num > 9) {
+          alert("Invalid choice")
+          return;
+        }
+        speed = document.getElementById('speed').value;
+        gameLoop = window.setInterval( function()  {
+          var x = Math.random() * 3;
+          if (x < 1) {
+            leftNum = num;
+            midNum = Math.floor(Math.random()*10);
+            rightNum = Math.floor(Math.random()*10);
+          } else if (x < 2) {
+            leftNum = Math.floor(Math.random()*10);
+            midNum = num;
+            rightNum = Math.floor(Math.random()*10);
+          } else {
+            leftNum = Math.floor(Math.random()*10);
+            midNum = Math.floor(Math.random()*10);
+            rightNum = num;
+          }
+
+          document.getElementById('left').innerHTML = leftNum;
+          document.getElementById('mid').innerHTML = midNum;
+          document.getElementById('right').innerHTML = rightNum;
+        }, speed);
+      }
+    </script>
+    <title>Part 2</title>
+  </head>
+  <body>
+    <button type="button" id="start" onclick="startGame()">Start Game</button>
+    <button type="button" id="stop" onclick="stopGame()">Stop Game</button> <br> <br>
+    <span id="title1" hidden>Your chosen number is: </span><span id=numSpan></span> <br>
+    <span id="title2" hidden>Your score so far: </span><span id="scoreSpan"></span>
+    <table id="gameTable" hidden>
+      <tr class="numbers" style="height:50px">
+        <td disabled id="left" style="color:red" onclick="clickLeft()"></td>
+        <td id="mid" style="color:yellow" onclick="clickMid()"></td>
+        <td id="right" style="color:blue" onclick="clickRight()"></td>
+      </tr>
+      <tr>
+        <td>Speed</td>
+        <td colspan="2"><input type="range" id="speed" value="1000" min="500" max="3000" step="100" onchange="changeSpeed()"></td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "pictures": [
+    {
+      "id": "1",
+      "title": "Desert Chillin - UAE",
+      "path": "Resources/img1.jpg"
+    },
+    {
+      "id": "2",
+      "title": "World's End - Sri Lanka",
+      "path": "Resources/img2.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Wadi Exploring - Oman",
+      "path": "Resources/img3.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Sunset in the Desert - UAE",
+      "path": "Resources/img4.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Road less travelled - UAE",
+      "path": "Resources/img5.jpg"
+    }
+  ]
+}
