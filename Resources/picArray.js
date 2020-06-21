@@ -8,5 +8,5 @@ xhttp.onreadystatechange = function() {
 		fetchJSON(picArray);
 	}
 };
-xhttp.open("GET", "https://api.jsonbin.io/b/5eef735b2406353b2e09e2af", true);
+xhttp.open("GET", "https://api.jsonbin.io/b/5eef73f12406353b2e09e2f8", true);
 xhttp.send();
